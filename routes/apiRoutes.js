@@ -1,6 +1,11 @@
+var fs = require("fs");
+const util = require("util");
 var router = require("express").Router();
 
-let notes = [];
+let notes = JSON.parse(fs.readFileSync('../db/db.json'));
+console.log(notes);
+
+let notesArray = [];
 
 router.get("/api/notes", function(req, res) {
     return res.json(notes)
@@ -9,7 +14,7 @@ router.get("/api/notes", function(req, res) {
 router.post("/api/notes", function(req, res) {
     var newNote = req.body;
     console.log(newNote);
-    notes.push(newNote);
+    notesArray.push(newNote);
 });
 
 module.exports = router;
